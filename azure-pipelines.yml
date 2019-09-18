@@ -6,16 +6,15 @@
 trigger:
 - development
 
-pool:
-  vmImage: 'ubuntu-latest'
-
 variables:
   vsixVersion: '$(MajorVersion).$(MinorVersion).$(Build.BuildId)'
 
 stages:
 - stage: Build and Publish
   jobs:
-  - job: TestOnWindows
+  - job: BuildAndPublish
+    pool:
+      vmImage: 'ubuntu-latest'
     steps:
 
     - task: TfxInstaller@2
@@ -41,7 +40,9 @@ stages:
 
 - stage: Test deployment
   jobs:
-  - job: Run extension task
+  - job: RunExtensionTask
+    pool:
+      name: 'Default'
     steps:
     - task: RasmusWatjen.EventGridSubscriptionExtension.EventGridSubscriptionExtension.EventGridSubscriptionExtension@0
       displayName: 'Create event subscription in dev-consent-revocation-eu-n-wdx-topic'
