@@ -28,10 +28,5 @@ steps:
     connectTo: 'VsTeam'
     connectedServiceName: 'VS Marketplace'
     fileType: 'vsix'
-    vsixFile: 'EventGridSubscriptionExtension.vsix'
+    vsixFile: '$(Pipeline.Workspace)/output/EventGridSubscriptionExtension.vsix'
     updateTasksVersion: false
-
-- task: PublishPipelineArtifact@1
-  inputs:
-    targetPath: '$(Pipeline.Workspace)/output/'
-    artifact: 'EventGridSubscriptionExtension.vsix'
