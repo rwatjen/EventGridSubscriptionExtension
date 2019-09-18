@@ -43,7 +43,6 @@ stages:
   jobs:
   - job: Run extension task
     steps:
-    steps:
     - task: RasmusWatjen.EventGridSubscriptionExtension.EventGridSubscriptionExtension.EventGridSubscriptionExtension@0
       displayName: 'Create event subscription in dev-consent-revocation-eu-n-wdx-topic'
       inputs:
