@@ -31,7 +31,8 @@
             "addressable": "true"
         },
         {
-            "path": "buildAndReleaseTask/ps_modules/PsUtility"
+            "path": "buildAndReleaseTask/ps_modules/PsUtility",
+            "packagePath": "/"
         }
     ],
     "content": {
