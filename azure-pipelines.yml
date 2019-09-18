@@ -10,7 +10,7 @@ variables:
   vsixVersion: '$(MajorVersion).$(MinorVersion).$(Build.BuildId)'
 
 stages:
-- stage: Build and Publish
+- stage: BuildAndPublish
   jobs:
   - job: BuildAndPublish
     pool:
@@ -38,7 +38,7 @@ stages:
         vsixFile: '$(Pipeline.Workspace)/output/RasmusWatjen.EventGridSubscriptionExtension-$(vsixVersion).vsix'
         updateTasksVersion: false
 
-- stage: Test deployment
+- stage: TestDeployment
   jobs:
   - job: RunExtensionTask
     pool:
