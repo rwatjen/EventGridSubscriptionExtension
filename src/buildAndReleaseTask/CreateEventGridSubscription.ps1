@@ -45,9 +45,10 @@ if ($includedEventType) {
     $params += "-IncludedEventType $includedEventType"
 }
 if ($deadLetterEvents) {
-    $params += "-DeadLettterEndpoint $deadletterResourceId"
+    $params += "-DeadLetterEndpoint $deadletterResourceId"
 }
 
 
 $cmd = "New-AzEventGridSubscription $params"
+Write-Host "Executing '$cmd'"
 Invoke-Expression $cmd
