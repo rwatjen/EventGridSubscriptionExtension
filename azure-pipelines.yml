@@ -6,13 +6,13 @@
 trigger:
 - development
 
+pool:
+  vmImage: 'ubuntu-latest'
+
 variables:
   vsixVersion: '$(MajorVersion).$(MinorVersion).$(Build.BuildId)'
 
 stages:
-  pool:
-    vmImage: 'ubuntu-latest'
-    
 - stage: Build and Publish
   jobs:
   - job: TestOnWindows
