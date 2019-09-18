@@ -6,31 +6,54 @@
 trigger:
 - development
 
-pool:
-  vmImage: 'ubuntu-latest'
-
 variables:
   vsixVersion: '$(MajorVersion).$(MinorVersion).$(Build.BuildId)'
 
-steps:
-- task: TfxInstaller@2
-  inputs:
-    version: 'v0.7.x'
+stages:
+- stage: BuildAndPublish
+  jobs:
+  - job: BuildAndPublish
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+
+    - task: TfxInstaller@2
+      inputs:
+        version: 'v0.7.x'
+
+    - task: PackageAzureDevOpsExtension@2
+      inputs:
+        rootFolder: 'src'
+        outputPath: '$(Pipeline.Workspace)/output/'
+        extensionVersion: '$(vsixVersion)'
+        updateTasksVersion: true
+        extensionVisibility: 'private'
 
 
-- task: PackageAzureDevOpsExtension@2
-  inputs:
-    rootFolder: 'src'
-    outputPath: '$(Pipeline.Workspace)/output/'
-    extensionVersion: '$(vsixVersion)'
-    updateTasksVersion: true
-    extensionVisibility: 'private'
+    - task: PublishAzureDevOpsExtension@2
+      inputs:
+        connectTo: 'VsTeam'
+        connectedServiceName: 'VS Marketplace'
+        fileType: 'vsix'
+        vsixFile: '$(Pipeline.Workspace)/output/RasmusWatjen.EventGridSubscriptionExtension-$(vsixVersion).vsix'
+        updateTasksVersion: false
 
+- stage: TestDeployment
+  jobs:
+  - job: RunExtensionTask
+    pool:
+      name: 'Default'
+    steps:
+    - task: RasmusWatjen.EventGridSubscriptionExtension.EventGridSubscriptionExtension.EventGridSubscriptionExtension@0
+      displayName: 'Create event subscription in dev-consent-revocation-eu-n-wdx-topic'
+      inputs:
+        azureSubscription: 'Consent Service Dev'
+        ResourceGroupName: 'ConsentService-Dev'
+        eventGridTopicName: 'dev-consent-revocation-eu-n-wdx-topic'
+        eventSubscriptionName: raswtest
+        endpointUrl: 'https://webhook.site/fbb91e60-3e93-4d0b-adf5-187e2ccd505c'
+        deadLetterEvents: true
+        deadLetterStorageAccountName: devconsentsvceunwdxstg
+        deadLetterBlobContainerName: 'eventgrid-deadletters'
+        includedEventType: ConsentService.ConsentRevoked
 
-- task: PublishAzureDevOpsExtension@2
-  inputs:
-    connectTo: 'VsTeam'
-    connectedServiceName: 'VS Marketplace'
-    fileType: 'vsix'
-    vsixFile: '$(Pipeline.Workspace)/output/RasmusWatjen.EventGridSubscriptionExtension-$(vsixVersion).vsix'
-    updateTasksVersion: false
