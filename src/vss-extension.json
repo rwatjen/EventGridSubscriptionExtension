@@ -29,6 +29,9 @@
         {
             "path": "images/settings.png",
             "addressable": "true"
+        },
+        {
+            "path": "buildAndReleaseTask/ps_modules/PsUtility"
         }
     ],
     "content": {
