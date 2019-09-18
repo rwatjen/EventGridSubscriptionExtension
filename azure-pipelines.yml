@@ -16,7 +16,7 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
-    npm install tfx-cli
+    npm install -g tfx-cli 
     cd src
     tfx extension create
   displayName: 'npm install and build'
