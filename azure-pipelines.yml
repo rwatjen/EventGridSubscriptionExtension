@@ -4,7 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
-- master
+- development
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -20,3 +20,16 @@ steps:
     cd src
     tfx extension create
   displayName: 'npm install and build'
+
+- task: PackageAzureDevOpsExtension@2
+  inputs:
+    rootFolder: 'src'
+    outputPath: 'output/EventGridSubscriptionExtension.vsix'
+    extensionVersion: '$(MajorVersion).$(MinorVersion).$(Build.BuildNumber)'
+    updateTasksVersion: true
+    extensionVisibility: 'private'
+
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Pipeline.Workspace)/output/EventGridSubscriptionExtension.vsix'
+    artifact: 'EventGridSubscriptionExtension.vsix'
