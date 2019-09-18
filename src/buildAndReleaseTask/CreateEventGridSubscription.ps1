@@ -1,7 +1,7 @@
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
 . "$PSScriptRoot/ps_modules/PsUtility/Utility.ps1"
-. "$PSScriptRoot/ps_modules/InitializeAzModuleFunctions.ps1"
+. "$PSScriptRoot/ps_modules/PsUtility/InitializeAzModuleFunctions.ps1"
 
 CleanUp-PSModulePathForHostedAgent
 Update-PSModulePathForHostedAgent
