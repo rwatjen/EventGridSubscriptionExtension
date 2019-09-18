@@ -7,6 +7,7 @@ param
     [String] [Parameter(Mandatory = $false)]
     $targetAzurePs
 )
+Write-Host $endpoint
 
 $endpointObject =  ConvertFrom-Json  $endpoint
 $moduleName = "Az.Accounts"
