@@ -85,19 +85,19 @@
         {
             "name": "deadLetterEvents",
             "type": "boolean",
-            "label": "Event deadlettering enabled",
-            "defaultValue": true,
+            "label": "Event dead-lettering enabled",
+            "defaultValue": false,
             "required": false,
             "groupName": "Deadletters",
-            "helpMarkDown": "If checked, event grid deadlettering will be enabled. You must also configure the storage account and container name."
+            "helpMarkDown": "If checked, event grid dead-lettering will be enabled. You must also configure the storage account and container name."
         },
         {
             "name": "deadLetterStorageAccountName",
             "type": "pickList",
-            "label": "Storage account for deadletter events",
+            "label": "Storage account for dead-lettered events",
             "required": "false",
             "defaultValue": "",
-            "helpMarkDown": "If event deadlettering is enabled, use this storage account to store them.",
+            "helpMarkDown": "If event dead-lettering is enabled, use this storage account to store them.",
             "properties": {
                 "EditableOptions": "True"
             },
@@ -107,10 +107,10 @@
         {
             "name": "deadLetterBlobContainerName",
             "type": "string",
-            "label": "Blob container for deadletter events",
+            "label": "Blob container for dead-lettered events",
             "required": "false",
             "defaultValue": "",
-            "helpMarkDown": "If event deadlettering is enabled, use this blob container to store them.",
+            "helpMarkDown": "If event dead-lettering is enabled, use this blob container to store them.",
             "groupName": "Deadletters",
             "visibleRule": "deadLetterEvents = true"
         },

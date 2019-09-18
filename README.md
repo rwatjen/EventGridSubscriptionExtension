@@ -22,8 +22,5 @@ To create an extension using the code in the src folder, run this command
 ## TODO
 
 * Event grid topic list is not loading in settings ui
-* updated screenshots and reference them in vss-extension.json
 * git push to github
 * storage account list is not loading in settings ui
-* default value for deadlettering enabled?
-* use dash in dead-lettering

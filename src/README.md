@@ -19,7 +19,6 @@ events.
 
 ## Usage
 
-TODO: update screenshot
 ![Extension Settings](images/settings.png)
 
 To configure the Event Grid Subscription task, first select an Azure Resource
