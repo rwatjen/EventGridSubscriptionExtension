@@ -9,6 +9,9 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+variables:
+  vsixVersion: '$(MajorVersion).$(MinorVersion).$(Build.BuildId)'
+
 steps:
 - task: TfxInstaller@2
   inputs:
@@ -19,14 +22,15 @@ steps:
   inputs:
     rootFolder: 'src'
     outputPath: '$(Pipeline.Workspace)/output/'
-    extensionVersion: '$(MajorVersion).$(MinorVersion).$(Build.BuildId)'
+    extensionVersion: '$(vsixVersion)'
     updateTasksVersion: true
     extensionVisibility: 'private'
+
 
 - task: PublishAzureDevOpsExtension@2
   inputs:
     connectTo: 'VsTeam'
     connectedServiceName: 'VS Marketplace'
     fileType: 'vsix'
-    vsixFile: '$(Pipeline.Workspace)/output/EventGridSubscriptionExtension.vsix'
+    vsixFile: '$(Pipeline.Workspace)/output/RasmusWatjen.EventGridSubscriptionExtension-$(vsixVersion).vsix'
     updateTasksVersion: false
