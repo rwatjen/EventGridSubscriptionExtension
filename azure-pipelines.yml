@@ -14,11 +14,12 @@ steps:
   inputs:
     version: 'v0.7.x'
 
+
 - task: PackageAzureDevOpsExtension@2
   inputs:
     rootFolder: 'src'
-    outputPath: 'output/EventGridSubscriptionExtension.vsix'
-    extensionVersion: '$(MajorVersion).$(MinorVersion).$(Build.BuildNumber)'
+    outputPath: '$(Pipeline.Workspace)/output/EventGridSubscriptionExtension.vsix'
+    extensionVersion: '$(MajorVersion).$(MinorVersion).$(Build.BuildId)'
     updateTasksVersion: true
     extensionVisibility: 'private'
 
