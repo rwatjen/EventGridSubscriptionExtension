@@ -1,6 +1,7 @@
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
 . "$PSScriptRoot/ps_modules/PsUtility/Utility.ps1"
+. "$PSScriptRoot/ps_modules/InitializeAzModuleFunctions.ps1"
 
 CleanUp-PSModulePathForHostedAgent
 Update-PSModulePathForHostedAgent
@@ -10,9 +11,7 @@ $resourceGroupName = Get-VstsInput -Name "ResourceGroupName" -Require
 $connectedServiceNameARM = Get-VstsInput -Name "ConnectedServiceNameARM" -Require
 $endPointRM = Get-VstsEndpoint -Name $connectedServiceNameARM -Require
 
-$expr = Join-Path $PSScriptRoot ps_modules\PsUtility\InitializeAz.ps1
-$expr = "$expr -endpoint '$endpointRM'"
-Invoke-Expression -Command $expr
+Initialize-AzModule -Endpoint $endpointRM
 
 $subscriptionId = $endpointRM.Data.subscriptionId
 
