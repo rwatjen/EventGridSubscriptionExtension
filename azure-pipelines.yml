@@ -18,12 +18,20 @@ steps:
 - task: PackageAzureDevOpsExtension@2
   inputs:
     rootFolder: 'src'
-    outputPath: '$(Pipeline.Workspace)/output/EventGridSubscriptionExtension.vsix'
+    outputPath: '$(Pipeline.Workspace)/output/'
     extensionVersion: '$(MajorVersion).$(MinorVersion).$(Build.BuildId)'
     updateTasksVersion: true
     extensionVisibility: 'private'
 
+- task: PublishAzureDevOpsExtension@2
+  inputs:
+    connectTo: 'VsTeam'
+    connectedServiceName: 'VS Marketplace'
+    fileType: 'vsix'
+    vsixFile: 'EventGridSubscriptionExtension.vsix'
+    updateTasksVersion: false
+
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: '$(Pipeline.Workspace)/output/EventGridSubscriptionExtension.vsix'
+    targetPath: '$(Pipeline.Workspace)/output/'
     artifact: 'EventGridSubscriptionExtension.vsix'
