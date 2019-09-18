@@ -11,7 +11,7 @@ $connectedServiceNameARM = Get-VstsInput -Name "ConnectedServiceNameARM" -Requir
 $endPointRM = Get-VstsEndpoint -Name $connectedServiceNameARM -Require
 
 $expr = Join-Path $PSScriptRoot ps_modules\PsUtility\Initialize-Az.ps1
-$expr = "$expr -endpoint $endpointRM"
+$expr = "$expr -endpoint '$endpointRM'"
 Invoke-Expression -Command $expr
 
 $subscriptionId = $endpointRM.Data.subscriptionId
