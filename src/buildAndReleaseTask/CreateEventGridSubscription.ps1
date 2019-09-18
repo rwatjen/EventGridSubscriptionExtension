@@ -1,5 +1,9 @@
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-Import-Module Az.EventGrid
+
+. "$PSScriptRoot\Utility.ps1"
+
+CleanUp-PSModulePathForHostedAgent
+Update-PSModulePathForHostedAgent
 
 $resourceGroupName = Get-VstsInput -Name "ResourceGroupName" -Require
 $connectedServiceNameARM = Get-VstsInput -Name "ConnectedServiceNameARM" -Require
