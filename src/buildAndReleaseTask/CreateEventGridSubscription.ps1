@@ -5,9 +5,12 @@
 CleanUp-PSModulePathForHostedAgent
 Update-PSModulePathForHostedAgent
 
+
 $resourceGroupName = Get-VstsInput -Name "ResourceGroupName" -Require
 $connectedServiceNameARM = Get-VstsInput -Name "ConnectedServiceNameARM" -Require
 $endPointRM = Get-VstsEndpoint -Name $connectedServiceNameARM -Require
+./$PSScriptRoot/ps_modules/PsUtility/Initialize-Az.ps1 -endpoint $endPointRM
+
 $subscriptionId = $endpointRM.Data.subscriptionId
 
 $eventGridTopicName = Get-VstsInput -Name "eventGridTopicName" -Require
