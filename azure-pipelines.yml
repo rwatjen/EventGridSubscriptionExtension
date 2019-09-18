@@ -18,7 +18,7 @@ steps:
   inputs:
     rootFolder: 'src'
     outputPath: 'output/EventGridSubscriptionExtension.vsix'
-    extensionVersion: '$(MajorVersion).$(MinorVersion).$(Build.BuildNumber)'
+    extensionVersion: '$(MajorVersion).$(MinorVersion).$(Rev:r)'
     updateTasksVersion: true
     extensionVisibility: 'private'
 
