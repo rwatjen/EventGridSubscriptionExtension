@@ -39,7 +39,7 @@ stages:
         vsixFile: '$(Pipeline.Workspace)/output/RasmusWatjen.EventGridSubscriptionExtension-$(vsixVersion).vsix'
         updateTasksVersion: false
 
--stage: Test deployment
+- stage: Test deployment
   jobs:
   - job: Run extension task
     steps:
