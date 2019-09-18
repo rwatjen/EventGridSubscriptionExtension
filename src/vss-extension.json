@@ -32,7 +32,6 @@
         },
         {
             "path": "buildAndReleaseTask/ps_modules/PsUtility",
-            "packagePath": "/"
         }
     ],
     "content": {
