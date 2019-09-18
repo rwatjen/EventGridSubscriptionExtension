@@ -1,0 +1,73 @@
+{
+    "manifestVersion": 1,
+    "id": "EventGridSubscriptionExtension",
+    "name": "Event Grid Subscription Extension",
+    "version": "0.0.3",
+    "publisher": "RasmusWatjen",
+    "public": false,
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],
+    "description": "Configure Azure Event Grid subscriptions",
+    "categories": [
+        "Azure Pipelines"
+    ],
+    "icons": {
+        "default": "images/extension-icon-square.png"
+    },
+    "tags": [
+        "releasemanagement",
+        "eventgrid",
+        "azure"
+    ],
+    "files": [
+        {
+            "path": "buildAndReleaseTask"
+        },
+        {
+            "path": "images/settings.png",
+            "addressable": "true"
+        }
+    ],
+    "content": {
+        "details": {
+            "path": "README.md"
+        }
+    },
+    "branding": {
+        "theme": "light",
+        "color": "rgb(91, 198, 116)"
+    },
+    "screenshots": [
+        {
+            "path": "images/settings.png"
+        }
+    ],
+    "links": {
+        "license": {
+            "uri": "https://raw.githubusercontent.com/rwatjen/EventGridSubscriptionExtension/development/LICENSE.txt"
+        },
+        "issues": {
+            "uri": "https://github.com/rwatjen/EventGridSubscriptionExtension/issues"
+        }
+    },
+    "repository": {
+        "type": "git",
+        "uri": "https://github.com/rwatjen/EventGridSubscriptionExtension"
+    },
+
+    "contributions": [
+        {
+            "id": "EventGridSubscriptionExtension",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "buildAndReleaseTask"
+            }
+        }
+    ]
+}
