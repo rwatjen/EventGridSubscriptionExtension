@@ -10,7 +10,7 @@ $resourceGroupName = Get-VstsInput -Name "ResourceGroupName" -Require
 $connectedServiceNameARM = Get-VstsInput -Name "ConnectedServiceNameARM" -Require
 $endPointRM = Get-VstsEndpoint -Name $connectedServiceNameARM -Require
 
-$expr = Join-Path $PSScriptRoot ps_modules\PsUtility\Initialize-Az.ps1
+$expr = Join-Path $PSScriptRoot ps_modules\PsUtility\InitializeAz.ps1
 $expr = "$expr -endpoint '$endpointRM'"
 Invoke-Expression -Command $expr
 
