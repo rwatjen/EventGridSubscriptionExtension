@@ -13,7 +13,7 @@ steps:
       $fileContents = Get-Content .\versioninfo.json -Raw
       $versionInfo = ConvertFrom-Json $fileContents
       $vsixVersion = $versionInfo.version + ".$(Build.BuildId)"
-      Write-Host "'##vso[task.setvariable variable=vsixVersion]$vsixVersion'
+      Write-Host "##vso[task.setvariable variable=vsixVersion]$vsixVersion"
 
 - task: TfxInstaller@2
   inputs:
