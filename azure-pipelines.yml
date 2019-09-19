@@ -36,33 +36,3 @@ stages:
         fileType: 'vsix'
         vsixFile: '$(Pipeline.Workspace)/output/RasmusWatjen.EventGridSubscriptionExtension-$(vsixVersion).vsix'
         updateTasksVersion: false
-
-- stage: TestDeployment
-  displayName: 'Testing Release with the EventGridSubscription extension task'
-  jobs:
-  - job: RunExtensionTask
-    pool:
-      name: 'Default'
-    steps:
-    - task: PowerShell@2
-      displayName: 'Sleep to wait for VS Marketplace update'
-      inputs:
-        targetType: 'inline'
-        script: |
-          $delay = 20
-          Write-Host "Sleeping for $delay seconds to wait for marketplace update"
-          Start-Sleep -Seconds $delay
-
-    - task: RasmusWatjen.EventGridSubscriptionExtension.EventGridSubscriptionExtension.EventGridSubscriptionExtension@0
-      displayName: 'Create event subscription in dev-consent-revocation-eu-n-wdx-topic'
-      inputs:
-        azureSubscription: 'Consent Service Dev'
-        ResourceGroupName: 'ConsentService-Dev'
-        eventGridTopicName: 'dev-consent-revocation-eu-n-wdx-topic'
-        eventSubscriptionName: raswtest
-        endpointUrl: 'https://webhook.site/fbb91e60-3e93-4d0b-adf5-187e2ccd505c'
-        deadLetterEvents: true
-        deadLetterStorageAccountName: devconsentsvceunwdxstg
-        deadLetterBlobContainerName: 'eventgrid-deadletters'
-        includedEventType: ConsentService.ConsentRevoked
-
