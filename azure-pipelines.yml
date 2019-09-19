@@ -44,6 +44,12 @@ stages:
     pool:
       name: 'Default'
     steps:
+    - task: PowerShell@2
+      inputs:
+        targetType: 'inline'
+        script: |
+          Write-Host "Sleeping for 10 seconds to wait for marketplace update"
+          Start-Sleep -Seconds 10
     - task: RasmusWatjen.EventGridSubscriptionExtension.EventGridSubscriptionExtension.EventGridSubscriptionExtension@0
       displayName: 'Create event subscription in dev-consent-revocation-eu-n-wdx-topic'
       inputs:
