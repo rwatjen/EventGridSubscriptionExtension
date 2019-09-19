@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "EventGridSubscriptionExtension",
     "name": "Event Grid Subscription Extension",
-    "version": "0.0.3",
+    "version": "0.0.1",
     "publisher": "RasmusWatjen",
     "public": false,
     "targets": [
