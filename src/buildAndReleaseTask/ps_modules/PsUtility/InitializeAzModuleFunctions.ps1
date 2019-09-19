@@ -1,5 +1,6 @@
 # Dot source Utility functions.
 . $PSScriptRoot/Utility.ps1
+. $PSScriptRoot/AzUtility.ps1
 
 function Initialize-AzModule {
     [CmdletBinding()]
@@ -60,32 +61,6 @@ function Import-AzModule {
      } finally {
         Trace-VstsLeavingInvocation $MyInvocation
      }
-}
-
-function Set-UserAgent {
-    [CmdletBinding()]
-    param()
-
-	$userAgent = Get-VstsTaskVariable -Name AZURE_HTTP_USER_AGENT
-    if ($userAgent) {
-        Set-UserAgent_Core -UserAgent $userAgent
-    }
-}
-
-function Set-UserAgent_Core {
-    [CmdletBinding()]
-    param(
-        [Parameter(Mandatory = $true)]
-        [string]$UserAgent)
-
-    Trace-VstsEnteringInvocation $MyInvocation
-    try {
-        [Microsoft.Azure.Common.Authentication.AzureSession]::ClientFactory.AddUserAgent($UserAgent)
-    } catch {
-        Write-Verbose "Set-UserAgent failed with exception message: $_.Exception.Message"
-    } finally {
-        Trace-VstsLeavingInvocation $MyInvocation
-    }
 }
 
 function Initialize-AzSubscription {
@@ -220,3 +195,4 @@ function Set-CurrentAzSubscription {
     Write-Host "##[command] Set-AzContext -SubscriptionId $SubscriptionId $(Format-Splat $additional)"
     $null = Set-AzContext -SubscriptionId $SubscriptionId @additional
 }
+
