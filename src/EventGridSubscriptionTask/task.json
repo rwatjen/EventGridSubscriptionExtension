@@ -1,8 +1,8 @@
 {
     "id": "a6900347-c049-485c-b383-2902e10c28f2",
     "name": "EventGridSubscriptionExtension",
-    "friendlyName": "Create Event Grid Subscriptions",
-    "description": "Create Azure Event Grid Subscriptions",
+    "friendlyName": "Create Event Grid Subscription",
+    "description": "Create Azure Event Grid Subscription",
     "helpMarkDown": "[More Information](http://bit.ly/2kRaypJ)",
     "category": "Utility",
     "visibility": [
@@ -151,13 +151,13 @@
         {
             "target": "eventGridTopicName",
             "endpointId": "$(ConnectedServiceNameARM)",
-            "endpointUrl": "{{{endpoint.url}}}subscriptions/{{{endpoint.subscriptionId}}}/resourceGroups/$(ResourceGroupName)/providers/Microsoft.EventGrid/topics/?api-version=2018-05-01",
+            "endpointUrl": "{{{endpoint.url}}}subscriptions/{{{endpoint.subscriptionId}}}/resourceGroups/$(ResourceGroupName)/providers/Microsoft.EventGrid/topics?api-version=2019-06-01",
             "resultSelector": "jsonpath:$.value[*].name"
         },
         {
             "target": "deadLetterStorageAccountName",
             "endpointId": "$(ConnectedServiceNameARM)",
-            "endpointUrl": "{{{endpoint.url}}}subscriptions/{{{endpoint.subscriptionId}}}/resourceGroups/$(ResourceGroupName)/providers/Microsoft.Storage/storageAccounts/?api-version=2018-05-01",
+            "endpointUrl": "{{{endpoint.url}}}subscriptions/{{{endpoint.subscriptionId}}}/resourceGroups/$(ResourceGroupName)/providers/Microsoft.Storage/storageAccounts?api-version=2019-04-01",
             "resultSelector": "jsonpath:$.value[*].name"
         }
     ],
