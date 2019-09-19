@@ -6,9 +6,6 @@ trigger:
 variables:
   extensionVisibility: 'private'
 
-pool:
-  vmImage: 'ubuntu-latest'
-
 steps:
 
 - task: PowerShell@2
