@@ -6,33 +6,35 @@
 trigger:
 - development
 
-variables:
-  vsixVersion: '$(MajorVersion).$(MinorVersion).$(Build.BuildId)'
+pool:
+  vmImage: 'ubuntu-latest'
+steps:
+- task: PowerShell@2
+  displayName: 'Set version from versioninfo.json and BuildId ($(Build.BuildId))'
+  inputs:
+    targetType: 'inline'
+    script: |
+      $fileContents = Get-Content .\versioninfo.json -Raw
+      $versionInfo = ConvertFrom-Json $fileContents
+      $vsixVersion = $versionInfo.version + ".$(Build.BuildId)"
+      Write-Host "'##vso[task.setvariable variable=vsixVersion]$vsixVersion'
 
-stages:
-- stage: BuildAndPublish
-  jobs:
-  - job: BuildAndPublish
-    pool:
-      vmImage: 'ubuntu-latest'
-    steps:
+- task: TfxInstaller@2
+  inputs:
+    version: 'v0.7.x'
 
-    - task: TfxInstaller@2
-      inputs:
-        version: 'v0.7.x'
+- task: PackageAzureDevOpsExtension@2
+  inputs:
+    rootFolder: 'src'
+    outputPath: '$(Pipeline.Workspace)/output/'
+    extensionVersion: '$(majorMinorVersion).$(Build.BuildId)'
+    updateTasksVersion: true
+    extensionVisibility: 'private'
 
-    - task: PackageAzureDevOpsExtension@2
-      inputs:
-        rootFolder: 'src'
-        outputPath: '$(Pipeline.Workspace)/output/'
-        extensionVersion: '$(vsixVersion)'
-        updateTasksVersion: true
-        extensionVisibility: 'private'
-
-    - task: PublishAzureDevOpsExtension@2
-      inputs:
-        connectTo: 'VsTeam'
-        connectedServiceName: 'VS Marketplace'
-        fileType: 'vsix'
-        vsixFile: '$(Pipeline.Workspace)/output/RasmusWatjen.EventGridSubscriptionExtension-$(vsixVersion).vsix'
-        updateTasksVersion: false
+- task: PublishAzureDevOpsExtension@2
+  inputs:
+    connectTo: 'VsTeam'
+    connectedServiceName: 'VS Marketplace'
+    fileType: 'vsix'
+    vsixFile: '$(Pipeline.Workspace)/output/RasmusWatjen.EventGridSubscriptionExtension-$(vsixVersion).vsix'
+    updateTasksVersion: false
