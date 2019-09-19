@@ -29,7 +29,6 @@ stages:
         updateTasksVersion: true
         extensionVisibility: 'private'
 
-
     - task: PublishAzureDevOpsExtension@2
       inputs:
         connectTo: 'VsTeam'
@@ -39,17 +38,21 @@ stages:
         updateTasksVersion: false
 
 - stage: TestDeployment
+  displayName: 'Testing Release with the EventGridSubscription extension task'
   jobs:
   - job: RunExtensionTask
     pool:
       name: 'Default'
     steps:
     - task: PowerShell@2
+      displayName: 'Sleep to wait for VS Marketplace update'
       inputs:
         targetType: 'inline'
         script: |
-          Write-Host "Sleeping for 10 seconds to wait for marketplace update"
-          Start-Sleep -Seconds 10
+          $delay = 20
+          Write-Host "Sleeping for $delay seconds to wait for marketplace update"
+          Start-Sleep -Seconds $delay
+
     - task: RasmusWatjen.EventGridSubscriptionExtension.EventGridSubscriptionExtension.EventGridSubscriptionExtension@0
       displayName: 'Create event subscription in dev-consent-revocation-eu-n-wdx-topic'
       inputs:
