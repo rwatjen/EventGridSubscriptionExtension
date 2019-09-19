@@ -62,6 +62,32 @@ function Import-AzModule {
      }
 }
 
+function Set-UserAgent {
+    [CmdletBinding()]
+    param()
+
+	$userAgent = Get-VstsTaskVariable -Name AZURE_HTTP_USER_AGENT
+    if ($userAgent) {
+        Set-UserAgent_Core -UserAgent $userAgent
+    }
+}
+
+function Set-UserAgent_Core {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$UserAgent)
+
+    Trace-VstsEnteringInvocation $MyInvocation
+    try {
+        [Microsoft.Azure.Common.Authentication.AzureSession]::ClientFactory.AddUserAgent($UserAgent)
+    } catch {
+        Write-Verbose "Set-UserAgent failed with exception message: $_.Exception.Message"
+    } finally {
+        Trace-VstsLeavingInvocation $MyInvocation
+    }
+}
+
 function Initialize-AzSubscription {
     [CmdletBinding()]
     param(
