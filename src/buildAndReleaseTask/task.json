@@ -2,7 +2,7 @@
     "id": "a6900347-c049-485c-b383-2902e10c28f2",
     "name": "EventGridSubscriptionExtension",
     "friendlyName": "Create Event Grid Subscriptions",
-    "description": "Create Azure Event Grid Subscriptions 0.0.3",
+    "description": "Create Azure Event Grid Subscriptions",
     "helpMarkDown": "[More Information](http://bit.ly/2kRaypJ)",
     "category": "Utility",
     "visibility": [
@@ -13,7 +13,7 @@
     "version": {
         "Major": 0,
         "Minor": 0,
-        "Patch": 3
+        "Patch": 1
     },
     "demands": [ "azureps" ],
     "instanceNameFormat": "Create event subscription in $(eventGridTopicName)",
