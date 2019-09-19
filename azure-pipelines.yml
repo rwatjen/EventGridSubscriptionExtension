@@ -6,12 +6,13 @@ trigger:
 variables:
   extensionVisibility: 'private'
 
-pool: Default
+pool:
+  vmImage: 'ubuntu-latest'
 
 steps:
 
 - task: PowerShell@2
-  displayName: 'Configure version and extension visibility)'
+  displayName: 'Configure version and extension visibility'
   inputs:
     targetType: 'inline'
     script: |
