@@ -1,12 +1,18 @@
 
 trigger:
 - development
+- master
+
+variables:
+  extensionVisibility: 'private'
 
 pool:
   vmImage: 'ubuntu-latest'
+
 steps:
+
 - task: PowerShell@2
-  displayName: 'Set version from versioninfo.json and BuildId ($(Build.BuildId))'
+  displayName: 'Configure version and extension visibility)'
   inputs:
     targetType: 'inline'
     script: |
@@ -14,6 +20,11 @@ steps:
       $versionInfo = ConvertFrom-Json $fileContents
       $vsixVersion = $versionInfo.version + ".$(Build.BuildId)"
       Write-Host "##vso[task.setvariable variable=vsixVersion]$vsixVersion"
+      if ($(Build.SourceBranchName) -eq "master") {
+        Write-Host "##vso[task.setvariable variable=extensionVisibility]public"
+      } else {
+        Write-Host "##vso[task.setvariable variable=extensionVisibility]private"
+      }
 
 - task: TfxInstaller@2
   inputs:
@@ -25,7 +36,7 @@ steps:
     outputPath: '$(Pipeline.Workspace)/output/'
     extensionVersion: '$(vsixVersion)'
     updateTasksVersion: true
-    extensionVisibility: 'private'
+    extensionVisibility: '$(extensionVisibility)'
 
 - task: PublishAzureDevOpsExtension@2
   inputs:
