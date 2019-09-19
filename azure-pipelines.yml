@@ -19,7 +19,7 @@ steps:
       $versionInfo = ConvertFrom-Json $fileContents
       $vsixVersion = $versionInfo.version + ".$(Build.BuildId)"
       Write-Host "##vso[task.setvariable variable=vsixVersion]$vsixVersion"
-      if ($(Build.SourceBranchName) -eq "master") {
+      if ("$(Build.SourceBranchName)" -eq "master") {
         Write-Host "##vso[task.setvariable variable=extensionVisibility]public"
       } else {
         Write-Host "##vso[task.setvariable variable=extensionVisibility]private"
