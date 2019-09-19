@@ -6,6 +6,8 @@ trigger:
 variables:
   extensionVisibility: 'private'
 
+pool: Default
+
 steps:
 
 - task: PowerShell@2
