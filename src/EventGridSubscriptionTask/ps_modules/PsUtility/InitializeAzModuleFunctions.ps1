@@ -1,3 +1,5 @@
+# This file is from https://github.com/microsoft/azure-pipelines-tasks/blob/e9932f67495be994bbc80674dfd20d563bec4e68/Tasks/Common/VstsAzureHelpers_/InitializeAzModuleFunctions.ps1
+
 # Dot source Utility functions.
 . $PSScriptRoot/Utility.ps1
 . $PSScriptRoot/AzUtility.ps1
