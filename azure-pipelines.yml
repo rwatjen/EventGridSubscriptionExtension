@@ -23,7 +23,7 @@ steps:
   inputs:
     rootFolder: 'src'
     outputPath: '$(Pipeline.Workspace)/output/'
-    extensionVersion: '$(majorMinorVersion).$(Build.BuildId)'
+    extensionVersion: '$(vsixVersion)'
     updateTasksVersion: true
     extensionVisibility: 'private'
 
