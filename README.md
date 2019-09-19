@@ -19,8 +19,3 @@ might find these links useful:
 To create an extension using the code in the src folder, run this command
 `tfx extension create --manifest-globs vss-extension.json`
 
-## TODO
-
-* Event grid topic list is not loading in settings ui
-* git push to github
-* storage account list is not loading in settings ui
