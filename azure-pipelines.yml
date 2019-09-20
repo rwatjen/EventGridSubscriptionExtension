@@ -8,7 +8,8 @@ variables:
   # The extension identifiers are set to non-default values on non-master branch builds
   extensionTag: ''
   extensionName: 'Event Grid Subscription Extension'
-  
+  extensionId: 'EventGridSubscriptionExtension'
+
 pool:
   vmImage: 'ubuntu-latest'
 
@@ -41,6 +42,7 @@ steps:
     outputPath: '$(Pipeline.Workspace)/output/RasmusWatjen.EventGridSubscriptionExtension-$(vsixVersion).vsix'
     extensionVersion: '$(vsixVersion)'
     updateTasksVersion: true
+    extensionId: '$(extensionId)'
     extensionVisibility: '$(extensionVisibility)'
     extensionTag: '$(extensionTag)'
     extensionName: '$(extensionName)'
