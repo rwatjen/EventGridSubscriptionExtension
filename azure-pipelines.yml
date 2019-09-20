@@ -45,7 +45,6 @@ steps:
     updateTasksVersion: true
     extensionId: '$(extensionId)'
     extensionVisibility: '$(extensionVisibility)'
-    extensionId: '$(extensionId)'
     extensionName: '$(extensionName)'
 
 - task: PublishAzureDevOpsExtension@2
