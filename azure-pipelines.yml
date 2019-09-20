@@ -27,10 +27,10 @@ steps:
         Write-Host "##vso[task.setvariable variable=extensionVisibility]public"
       } else {
         Write-Host "##vso[task.setvariable variable=extensionVisibility]private"
-        $extensionId = "$(extensionId)-$(Build.SourceBranchName)"
+        $extensionId = "CI-BUILD-$(extensionId)-$(Build.SourceBranchName)"
         $extensionId = $extensionId.SubString(0, [math]::min(63, $extensionId.length))
         Write-Host "##vso[task.setvariable variable=extensionId]$extensionId"
-        Write-Host "##vso[task.setvariable variable=extensionName]$(extensionName) - $(Build.SourceBranchName)"
+        Write-Host "##vso[task.setvariable variable=extensionName]CI BUILD $(extensionName) - $(Build.SourceBranchName)"
       }
 
 - task: TfxInstaller@2
