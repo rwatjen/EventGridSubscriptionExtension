@@ -5,6 +5,9 @@ trigger:
 
 variables:
   extensionVisibility: 'private'
+  # The extension identifiers are set to non-default values on non-master branch builds
+  extensionName: 'Event Grid Subscription Extension'
+  extensionId: 'EventGridSubscriptionExtension'
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -24,6 +27,10 @@ steps:
         Write-Host "##vso[task.setvariable variable=extensionVisibility]public"
       } else {
         Write-Host "##vso[task.setvariable variable=extensionVisibility]private"
+        $extensionId = "CI-BUILD-$(extensionId)-$(Build.SourceBranchName)"
+        $extensionId = $extensionId.SubString(0, [math]::min(63, $extensionId.length))
+        Write-Host "##vso[task.setvariable variable=extensionId]$extensionId"
+        Write-Host "##vso[task.setvariable variable=extensionName]CI BUILD $(extensionName) - $(Build.SourceBranchName)"
       }
 
 - task: TfxInstaller@2
@@ -33,10 +40,12 @@ steps:
 - task: PackageAzureDevOpsExtension@2
   inputs:
     rootFolder: 'src'
-    outputPath: '$(Pipeline.Workspace)/output/'
+    outputPath: '$(Pipeline.Workspace)/output/RasmusWatjen.EventGridSubscriptionExtension-$(vsixVersion).vsix'
     extensionVersion: '$(vsixVersion)'
     updateTasksVersion: true
+    extensionId: '$(extensionId)'
     extensionVisibility: '$(extensionVisibility)'
+    extensionName: '$(extensionName)'
 
 - task: PublishAzureDevOpsExtension@2
   inputs:

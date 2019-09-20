@@ -35,11 +35,11 @@ if ($deadLetterEvents) {
 }
 
 $params = @()
-$params += "-ResourceGroupName $resourceGroupname"
-$params += "-TopicName $eventGridTopicName"
-$params += "-EventSubscriptionname $eventSubscriptionname"
-$params += "-Endpoint $endpointUrl"
-$params += "-EndpointType webhook"
+$params += "-ResourceGroupName ""$resourceGroupname"""
+$params += "-TopicName ""$eventGridTopicName"""
+$params += "-EventSubscriptionname ""$eventSubscriptionname"""
+$params += "-Endpoint ""$endpointUrl"""
+$params += "-EndpointType ""webhook"""
 if ($eventTtl) {
     $params += "-EventTtl $eventTtl"
 }
