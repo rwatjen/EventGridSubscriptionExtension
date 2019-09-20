@@ -28,7 +28,9 @@ steps:
         Write-Host "##vso[task.setvariable variable=extensionVisibility]public"
       } else {
         Write-Host "##vso[task.setvariable variable=extensionVisibility]private"
-        Write-Host "##vso[task.setvariable variable=extensionTag]-$(Build.SourceBranchName)"
+        $extensionId = "$(extensionId)-$(Build.SourceBranchName)"
+        $extensionId = $extensionId.SubString(0, [math]::min(63, $extensionId.length))
+        Write-Host "##vso[task.setvariable variable=extensionId]"
         Write-Host "##vso[task.setvariable variable=extensionName]$(extensionName) - $(Build.SourceBranchName)"
       }
 
