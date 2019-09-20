@@ -6,7 +6,6 @@ trigger:
 variables:
   extensionVisibility: 'private'
   # The extension identifiers are set to non-default values on non-master branch builds
-  extensionTag: ''
   extensionName: 'Event Grid Subscription Extension'
   extensionId: 'EventGridSubscriptionExtension'
 
@@ -30,7 +29,7 @@ steps:
         Write-Host "##vso[task.setvariable variable=extensionVisibility]private"
         $extensionId = "$(extensionId)-$(Build.SourceBranchName)"
         $extensionId = $extensionId.SubString(0, [math]::min(63, $extensionId.length))
-        Write-Host "##vso[task.setvariable variable=extensionId]"
+        Write-Host "##vso[task.setvariable variable=extensionId]$extensionId"
         Write-Host "##vso[task.setvariable variable=extensionName]$(extensionName) - $(Build.SourceBranchName)"
       }
 
@@ -46,7 +45,7 @@ steps:
     updateTasksVersion: true
     extensionId: '$(extensionId)'
     extensionVisibility: '$(extensionVisibility)'
-    extensionTag: '$(extensionTag)'
+    extensionId: '$(extensionId)'
     extensionName: '$(extensionName)'
 
 - task: PublishAzureDevOpsExtension@2
